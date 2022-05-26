@@ -2,7 +2,9 @@
 // If there is no license, return an empty string
 function renderLicenseBadge(license, user, repo) {
   if (license) {
-    return `https://img.shields.io/github/license/${user}/${repo}?style=flat-square`
+    return `![GitHub](https://img.shields.io/github/license/${user}/${repo}?style=flat-square)
+
+`
   } else {
     return ''
   }
@@ -10,11 +12,37 @@ function renderLicenseBadge(license, user, repo) {
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {}
+
+// This function turned out fairly unnecessary the way I set things up when generating my markdown
+function renderLicenseLink(license) {
+    if (license) {
+      return license
+    } else {
+      return ''
+  }
+}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {}
+function renderLicenseSection(license, fileString) {
+  if (license != 'Other') {
+    fileString = fileString.concat(
+`## License
+
+Here is a link to my ${license} license file: [Link](./license)
+
+`)
+    return fileString
+  } else {
+    fileString = fileString.concat(
+      `## License
+      
+      Here is a link to my license file: [Link](./license)
+      
+      `)
+          return fileString
+  }
+}
 
 // TODO: Create a function to generate markdown for README
 function createMarkdown(data) {
@@ -23,10 +51,17 @@ function createMarkdown(data) {
   let markdown = `# ${data.titleA}
 
 `;
+if (data.gitUserA && data.repoNameA) {
+  var badge = renderLicenseBadge(data.licenseA, data.gitUserA, data.repoNameA)
+  markdown = markdown.concat(`${badge}
+  
+`)
+}
   if (data.linkA) {
     markdown = markdown.concat(`${data.linkA}
     
 `)    
+
 
   // Table of contents will check for whether each section exists and, if it does, add it with
   // a link to that section
@@ -37,6 +72,7 @@ function createMarkdown(data) {
 
   if (data.descriptionA) {
     markdown = markdown.concat(`[- Description](#description)
+    
 `)
   }
   if (data.installationA) {
@@ -136,8 +172,12 @@ Tutorials: ${data.tutorialsA}
 
 `)
     }
-    if (data.testA) {
-      markdown = markdown.concat(`## Test
+  if (data.licenseA) {
+    markdown = renderLicenseSection(data.licenseA, markdown)
+  }
+
+  if (data.testA) {
+    markdown = markdown.concat(`## Test
 
 ${data.testA}
 
@@ -146,19 +186,19 @@ ${data.testA}
 
 // Doing something similar here as above but trying a different layout instead of the nested if's
 
-    if (data.gitUserA || data.emailA) {
-      markdown = markdown.concat(`## Questions?
+  if (data.gitUserA || data.emailA) {
+    markdown = markdown.concat(`## Questions?
 
 Still have any questions? Feel free to reach me using:
 
 `)
-      if(data.gitUserA) {
-        markdown = markdown.concat(`GitHub Profile: [${data.gitUserA}](github.com/${data.gitUserA})
+    if(data.gitUserA) {
+      markdown = markdown.concat(`GitHub Profile: [${data.gitUserA}](github.com/${data.gitUserA})
 
 `)
       }
-      if(data.emailA) {
-        markdown = markdown.concat(`Email Address: ${data.emailA}
+    if(data.emailA) {
+       markdown = markdown.concat(`Email Address: ${data.emailA}
 
 `)
       }

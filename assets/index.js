@@ -16,6 +16,7 @@ const questions = [
     'If applicable, List the GitHub profile links of any collaborators you worked with',
     'If applicable, list any third-party assets that require attribution. List the creators with links to their primary web presence in this section.',
     'If applicable, list any tutorials you used to help you create this project.',
+    'What type of license did you use?',
     'What information about testing the project can you add?',
     'What is the name of your repo?',
     'What is your GitHub username?',
@@ -31,6 +32,7 @@ const [
     collaborators, 
     thirdPartyAssets, 
     tutorials,
+    license,
     test,
     repoName,
     gitUser,
@@ -84,6 +86,12 @@ function init() {
             type: 'input',
             name: 'tutorialsA',
             message: tutorials
+        },
+        {
+            type: 'list',
+            name: 'licenseA',
+            message: license,
+            choices: ['MIT', 'GPLv2', 'Apache', 'GPLv3', 'BSD 3-clause', 'Other']
         },
         {
             type: 'input',
