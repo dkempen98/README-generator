@@ -15,6 +15,9 @@ Download or clone the repo to your local and go to the terminal for the index.js
 ## Usage
     
 Once in the terminal and running 'node index.js', answer all of the questions that are prompted. If something doesn't apply, you can simply press enter and leave it blank, the program will not include the section.
+
+<img width="458" alt="image" src="https://user-images.githubusercontent.com/25507661/171545373-78431812-b3ab-407e-870b-2407bed86e41.png">
+
     
 ## Credits
 
